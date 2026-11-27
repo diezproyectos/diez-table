@@ -1,0 +1,10 @@
+<div
+  class="table-cell"
+  [style.--width]="width()"
+  [style.--text-align]="textAlign()"
+  [style.--padding]="padding() || null"
+  [style.--max-width-desktop]="maxWidthDesktop()"
+  [attr.data-label]="label() || null"
+  [class.column]="column()">
+  <ng-content></ng-content>
+</div>

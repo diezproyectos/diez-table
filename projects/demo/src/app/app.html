@@ -1,0 +1,90 @@
+<h2>1. Basic</h2>
+<dz-table id="basic">
+  <dz-table-header>
+    <dz-table-head width="30%">Name</dz-table-head>
+    <dz-table-head>Role</dz-table-head>
+    <dz-table-head align="flex-end">Score</dz-table-head>
+  </dz-table-header>
+  <dz-table-body>
+    @for (p of people(); track p.id) {
+      <dz-table-row>
+        <dz-table-cell label="Name" width="30%">{{ p.name }}</dz-table-cell>
+        <dz-table-cell label="Role">{{ p.role }}</dz-table-cell>
+        <dz-table-cell label="Score" align="flex-end">{{ p.score }}</dz-table-cell>
+      </dz-table-row>
+    }
+  </dz-table-body>
+</dz-table>
+
+<h2>2. Columns from data</h2>
+<dz-table id="columns">
+  <dz-table-header>
+    @for (c of columns; track c.key) {
+      <dz-table-head [width]="c.width || 'auto'">{{ c.title }}</dz-table-head>
+    }
+  </dz-table-header>
+  <dz-table-body>
+    @for (p of people(); track p.id) {
+      <dz-table-row>
+        @for (c of columns; track c.key) {
+          <dz-table-cell [label]="c.title" [width]="c.width || 'auto'">{{ p[c.key] }}</dz-table-cell>
+        }
+      </dz-table-row>
+    }
+  </dz-table-body>
+</dz-table>
+
+<h2>3. Custom style</h2>
+<dz-table id="styled" class="dark">
+  <dz-table-header>
+    <dz-table-head width="30%">Name</dz-table-head>
+    <dz-table-head>Role</dz-table-head>
+    <dz-table-head align="flex-end">Score</dz-table-head>
+  </dz-table-header>
+  <dz-table-body>
+    @for (p of people(); track p.id) {
+      <dz-table-row>
+        <dz-table-cell label="Name" width="30%">{{ p.name }}</dz-table-cell>
+        <dz-table-cell label="Role">{{ p.role }}</dz-table-cell>
+        <dz-table-cell label="Score" align="flex-end">{{ p.score }}</dz-table-cell>
+      </dz-table-row>
+    }
+  </dz-table-body>
+</dz-table>
+
+<h2>4. Behaviour: sorting, clicks, empty state, custom cells</h2>
+<dz-table id="behaviour">
+  <dz-table-header>
+    <dz-table-head width="30%">Name</dz-table-head>
+    <dz-table-head>Email</dz-table-head>
+    <dz-table-head align="flex-end">
+      <button type="button" (click)="toggleSort()">Score {{ descending() ? '↓' : '↑' }}</button>
+    </dz-table-head>
+  </dz-table-header>
+  <dz-table-body>
+    @for (p of sorted(); track p.id) {
+      <dz-table-row (click)="selected.set(p)" [class.selected]="selected()?.id === p.id">
+        <dz-table-cell label="Name" width="30%" maxWidthDesktop="14em">{{ p.name }}</dz-table-cell>
+        <dz-table-cell label="Email" [column]="true">{{ p.email }}</dz-table-cell>
+        <dz-table-cell label="Score" align="flex-end">
+          <span class="badge">{{ p.score }}</span>
+        </dz-table-cell>
+      </dz-table-row>
+    } @empty {
+      <p>No people yet.</p>
+    }
+  </dz-table-body>
+</dz-table>
+<p id="selected">Selected: {{ selected()?.name ?? 'nobody' }}</p>
+
+<h2>5. Empty</h2>
+<dz-table id="empty">
+  <dz-table-header><dz-table-head>Name</dz-table-head></dz-table-header>
+  <dz-table-body>
+    @for (p of none(); track p.id) {
+      <dz-table-row><dz-table-cell label="Name">{{ p.name }}</dz-table-cell></dz-table-row>
+    } @empty {
+      <p>No people yet.</p>
+    }
+  </dz-table-body>
+</dz-table>

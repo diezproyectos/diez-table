@@ -1,0 +1,13 @@
+:host {
+  display: none;
+}
+
+@media screen and (min-width: 64em) {
+  :host {
+    display: contents;
+  }
+
+  .table-header {
+    display: table-header-group;
+  }
+}

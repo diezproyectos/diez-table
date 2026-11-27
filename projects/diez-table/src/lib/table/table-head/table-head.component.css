@@ -1,0 +1,5 @@
+:host {
+  display: contents;
+  font-weight: var(--dz-table-head-font-weight, bold);
+  color: var(--dz-table-head-color, inherit);
+}

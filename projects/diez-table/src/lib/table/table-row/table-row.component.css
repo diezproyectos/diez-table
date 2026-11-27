@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--dz-table-row-gap, 1em);
+  border-bottom: 1px solid var(--dz-table-border-color, #e0e0e0);
+}
+
+@media screen and (min-width: 64em) {
+  :host {
+    display: table-row;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}

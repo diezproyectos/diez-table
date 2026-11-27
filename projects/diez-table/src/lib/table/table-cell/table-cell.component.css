@@ -1,0 +1,41 @@
+.table-cell {
+  display: flex;
+  flex-direction: row;
+  gap: var(--dz-table-cell-gap, 1em);
+  padding: var(--dz-table-cell-padding, 0.5em 1em);
+  text-wrap: balance;
+  word-break: break-word;
+}
+
+.table-cell.column {
+  flex-direction: column;
+  gap: 0.25em;
+}
+
+.table-cell::before {
+  content: attr(data-label);
+  font-size: var(--dz-table-label-font-size, 0.9em);
+  color: var(--dz-table-label-color, inherit);
+  min-width: var(--dz-table-label-width, 0);
+  padding-top: 0.125em;
+  word-break: normal;
+}
+
+@media screen and (min-width: 64em) {
+  :host {
+    display: contents;
+  }
+
+  .table-cell {
+    display: table-cell;
+    width: var(--width);
+    max-width: var(--max-width-desktop);
+    text-align: var(--text-align, start);
+    border-bottom: 1px solid var(--dz-table-border-color, #e0e0e0);
+    padding: var(--padding, var(--dz-table-cell-padding, 0.5em 1em));
+  }
+
+  .table-cell::before {
+    display: none;
+  }
+}

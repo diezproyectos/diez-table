@@ -1,0 +1,18 @@
+:host { display: block; max-width: 60rem; margin: 0 auto; padding: 1rem; font-family: system-ui, sans-serif; }
+h2 { font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+
+.dark {
+  --dz-table-border-color: #444;
+  --dz-table-label-color: #9aa;
+  --dz-table-head-font-weight: 600;
+  --dz-table-head-color: #ff9f43;
+  --dz-table-cell-padding: 0.75em 1.25em;
+  --dz-table-row-gap: 0.5em;
+  background: #1e1e24;
+  color: #eee;
+  border-radius: 8px;
+}
+
+.badge { background: #e8f5e9; padding: 0.1em 0.6em; border-radius: 1em; }
+dz-table-row.selected { background: #fff3e0; }
+dz-table-row { cursor: pointer; }
