@@ -1,0 +1,58 @@
+name: Publish to npm
+
+# Runs only on commits pushed to main (merged pull requests included).
+on:
+  push:
+    branches: [main]
+
+# One run at a time, so two quick pushes cannot publish at once.
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install
+        run: npm ci
+
+      - name: Test
+        run: npm run test:lib
+
+      - name: Build
+        run: npm run build:lib
+
+      # npm refuses to publish a version that already exists, so a commit that
+      # does not bump the version only runs the tests and the build.
+      - name: Check whether this version is already on npm
+        id: version
+        run: |
+          NAME=$(node -p "require('./projects/diez-table/package.json').name")
+          VERSION=$(node -p "require('./projects/diez-table/package.json').version")
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if npm view "$NAME@$VERSION" version > /dev/null 2>&1; then
+            echo "$NAME@$VERSION is already published: nothing to do."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "$NAME@$VERSION is new: it will be published."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish
+        if: steps.version.outputs.publish == 'true'
+        run: npm publish ./dist/diez-table --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
