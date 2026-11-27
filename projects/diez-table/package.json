@@ -1,6 +1,6 @@
 {
   "name": "@diezproyectos/diez-table",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A responsive table for Angular: a real table on large screens, a list of labelled cards on small ones. Standalone components, pure CSS, themable with CSS variables.",
   "keywords": [
     "angular",
