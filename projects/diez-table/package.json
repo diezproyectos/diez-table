@@ -16,8 +16,8 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@angular/common": "^22.3.0",
-    "@angular/core": "^22.3.0"
+    "@angular/common": "^22.0.0",
+    "@angular/core": "^22.0.0"
   },
   "sideEffects": false,
   "exports": {

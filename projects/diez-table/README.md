@@ -10,7 +10,7 @@ It is built from six tiny standalone components (`dz-table`, `dz-table-header`, 
 npm install @diezproyectos/diez-table
 ```
 
-Requires Angular 22.3 or later in the 22.x line (`@angular/core` and `@angular/common` `^22.3.0`).
+Requires Angular 22 (any 22.x version): `@angular/core` and `@angular/common` `^22.0.0`.
 
 ## Quick start
 
